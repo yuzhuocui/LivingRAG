@@ -1,0 +1,104 @@
+{
+  "2wikimultihop": {
+    "repo": "Zly0523/linear-rag",
+    "revision": "f7971bb84fe205d0c080df5f48b1393d9f580c68",
+    "files": [
+      "2wikimultihop/questions.json",
+      "2wikimultihop/chunks.json"
+    ],
+    "expected": {
+      "questions.json": {
+        "count": 1000,
+        "sha256": "32546f6fb2f8e62d2dff1b154dd33e1096c1e134b04c81670a86a1701e71e582"
+      },
+      "chunks.json": {
+        "count": 658,
+        "sha256": "551be25f66cf116a6fa1ef236c793e03b4faedd734c4416a2b5c64ee009a7ea5"
+      }
+    }
+  },
+  "hotpotqa": {
+    "repo": "Zly0523/linear-rag",
+    "revision": "f7971bb84fe205d0c080df5f48b1393d9f580c68",
+    "files": [
+      "hotpotqa/questions.json",
+      "hotpotqa/chunks.json"
+    ],
+    "expected": {
+      "questions.json": {
+        "count": 1000,
+        "sha256": "d4a988bfb79915fdcc0cfbb2b8b67a3cdfd4703d90f0807acd983c73a303ec26"
+      },
+      "chunks.json": {
+        "count": 1311,
+        "sha256": "b627f3b69714fa9fc42aa834dbc71b65041c63475ab06c5514b238e8599c6fa4"
+      }
+    }
+  },
+  "musique": {
+    "repo": "Zly0523/linear-rag",
+    "revision": "f7971bb84fe205d0c080df5f48b1393d9f580c68",
+    "files": [
+      "musique/questions.json",
+      "musique/chunks.json"
+    ],
+    "expected": {
+      "questions.json": {
+        "count": 1000,
+        "sha256": "c82d1f45894ae51b0f11659ebd4a4ec30a7f9a7636fe75b4f43d41dcc535e657"
+      },
+      "chunks.json": {
+        "count": 1354,
+        "sha256": "b55b668ee7ddeaed05c7c647ac3e990c5756853d5e3cd8e1d0e1943d8e3da25e"
+      }
+    }
+  },
+  "musique_full": {
+    "repo": "bdsaglam/musique",
+    "revision": "22873a405dd809893b22ada0b499299fb612d2df",
+    "files": [
+      "musique_ans_v1.0_dev.jsonl"
+    ],
+    "raw_sha256": {
+      "musique_ans_v1.0_dev.jsonl": "15fa63794d18a94ce12411aca6e2327e65b6e83b0b1490efab3f1962e48abf3b"
+    },
+    "expected": {
+      "questions.json": {
+        "count": 2417,
+        "sha256": "fa3464c6a15e81c9e8cbd8b62f794dda0b2be3a21fdc76e64fca0f6f47545523"
+      },
+      "chunks.json": {
+        "count": 2379,
+        "sha256": "97c69f98a0cefa8b3b53a142af773ef14b20e216e4ab3a690f3078218619f7f6"
+      }
+    }
+  },
+  "wixqa": {
+    "repo": "Wix/WixQA",
+    "revision": "d662dc42479c14e202eccd832f8c4b66a035c4cc",
+    "files": [
+      "wix_kb_corpus/wix_kb_corpus.jsonl",
+      "wixqa_expertwritten/test.jsonl",
+      "wixqa_simulated/test.jsonl"
+    ],
+    "raw_sha256": {
+      "wix_kb_corpus/wix_kb_corpus.jsonl": "46b852c60b85fb1828e7c6118bb56ba796eba99120a6b69c6b984c06e1c5e1fe",
+      "wixqa_expertwritten/test.jsonl": "a1bb6888a8394f980bc88f0d09b873fcd283ff4c9782600bc203f8103c2f1bad",
+      "wixqa_simulated/test.jsonl": "9a2b9f42c081467b3de5bd92511e770bca3cc7977f169526fd78dd3c985ac4a8"
+    },
+    "expected": {
+      "questions.json": {
+        "count": 400,
+        "sha256": "f56cde1f4229dce81424e851565d33a9778a326ef0d1f82fa79c23a4f5825659"
+      },
+      "chunks.json": {
+        "count": 7132,
+        "sha256": "90667eef809fd5463afeda9a7e23403e9a49c811a4f1884c2e63c7e80bc305cf"
+      },
+      "corpus_meta.json": {
+        "count": 7132,
+        "sha256": "f517b3397e5ea556e7f254821bacdcdd632a9feabefd7a105bfb355bfaa34fc6"
+      }
+    }
+  }
+}

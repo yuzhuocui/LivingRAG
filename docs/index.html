@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LivingRAG: Augmenting Graph RAG with Experience</title>
+  <meta name="description" content="LivingRAG adds writable, reusable reasoning experience to Graph RAG, guiding retrieval and answer generation with verified prior experience.">
+  <meta property="og:title" content="LivingRAG: Augmenting Graph RAG with Experience">
+  <meta property="og:description" content="A Graph RAG framework with writable and reusable reasoning experience. Findings of EMNLP 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yuzhuocui.github.io/LivingRAG/">
+  <meta property="og:image" content="https://yuzhuocui.github.io/LivingRAG/assets/method.png">
+  <meta name="theme-color" content="#2456a6">
+  <link rel="canonical" href="https://yuzhuocui.github.io/LivingRAG/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="wordmark" href="#top">LivingRAG<span aria-hidden="true">.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="paper-title">
+      <p class="venue">Findings of EMNLP 2026</p>
+      <h1 id="paper-title"><span class="project-name">LivingRAG</span><span class="paper-title">Augmenting Graph RAG<br class="desktop-break"> with Experience</span></h1>
+      <p class="authors"><span>Yuzhuo Cui<sup>1,2</sup></span><span>Zongye Zhang<sup>1,2</sup></span><span>Qingjie Liu<sup>1,2,*</sup></span></p>
+      <div class="affiliations">
+        <p><sup>1</sup> State Key Laboratory of Virtual Reality Technology and Systems,<br class="desktop-break"> Beihang University, Beijing, China</p>
+        <p><sup>2</sup> Hangzhou Innovation Institute, Beihang University, Hangzhou, Zhejiang, China</p>
+        <p class="corresponding">* Corresponding author</p>
+      </div>
+      <div class="paper-links">
+        <a class="button primary" href="https://arxiv.org/abs/2608.25960"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M8 12h8M8 16h6"/></svg>Paper</a>
+        <a class="button" href="https://github.com/yuzhuocui/LivingRAG"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></svg>Code</a>
+        <a class="button" href="#citation"><span class="quote-icon" aria-hidden="true">“</span>BibTeX</a>
+      </div>
+    </section>
+
+    <section class="section abstract-section" id="abstract" aria-labelledby="abstract-title">
+      <div class="reading-width">
+        <p class="section-label">The idea</p>
+        <h2 id="abstract-title">Abstract</h2>
+        <p class="abstract">Graph-based RAG improves multi-hop question answering by organizing evidence as a knowledge graph. However, most existing RAG systems process each query in isolation and discard useful reasoning from the LLM's response after inference. As a result, later related queries need to retrieve evidence and reason from scratch. We propose LivingRAG, a Graph RAG framework with writable and reusable reasoning experience. LivingRAG adds a writable experience store to a graph-based retrieval backbone, enabling verified experiences to be reused during inference in two ways. Stored graph signals help retrieval find entities and passages that were useful in earlier related queries. Stored summaries provide a reference reasoning pattern for answer generation. We analyze online QA streams and find reusable signals from shared entities, graph neighborhoods, and question templates. Experiments on multi-hop QA benchmarks show that LivingRAG improves accuracy over strong RAG baselines and reduces completion-token use when relevant prior experience is reused.</p>
+      </div>
+    </section>
+
+    <section class="section content-width" id="method" aria-labelledby="method-title">
+      <div class="section-heading">
+        <p class="section-label">Method</p>
+        <h2 id="method-title">Retrieve. Reason. Remember.</h2>
+        <p class="section-intro">LivingRAG extends a static graph retriever with a writable experience store. Verified experience guides both evidence retrieval and answer generation.</p>
+      </div>
+      <figure>
+        <a class="figure-link" href="assets/method.pdf" aria-label="Open the full-resolution LivingRAG method figure as a PDF">
+          <img src="assets/method.png" width="2400" height="979" loading="lazy" alt="LivingRAG first builds a static graph from passages, sentences and entities. During online question answering, stored activation maps guide retrieval and reasoning summaries support generation. New experiences are stored only after grounding and novelty checks.">
+        </a>
+        <figcaption>Overview of LivingRAG. A static retrieval graph is augmented with reusable reasoning experience. <a href="assets/method.pdf">Full-resolution figure ↗</a></figcaption>
+      </figure>
+      <div class="method-steps">
+        <div><span class="step-number">01</span><h3>Experience-augmented retrieval</h3><p>Stored activation maps guide graph retrieval toward evidence neighborhoods that helped answer earlier related queries.</p></div>
+        <div><span class="step-number">02</span><h3>Scaffolded generation</h3><p>A relevant reasoning summary provides a reference pattern alongside the retrieved passages.</p></div>
+        <div><span class="step-number">03</span><h3>Quality-gated write-back</h3><p>New experiences enter the store only after grounding and novelty checks, keeping unsupported or redundant reasoning out.</p></div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" aria-labelledby="results-title">
+      <div class="content-width">
+        <div class="section-heading">
+          <p class="section-label">Experiments</p>
+          <h2 id="results-title">Accuracy across QA benchmarks</h2>
+          <p class="section-intro">LivingRAG achieves the highest accuracy in the reported comparisons. Each dataset run starts with an empty experience store; only earlier queries can contribute experience to later queries.</p>
+        </div>
+        <p class="table-hint" id="table-hint">Scroll horizontally to view all benchmarks.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Benchmark accuracy table" aria-describedby="table-note table-hint">
+          <table>
+            <caption>Table 2 from the paper. Overall accuracy (%).</caption>
+            <colgroup><col class="method-column"></colgroup>
+            <colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="2"></colgroup><colgroup span="1"></colgroup>
+            <thead>
+              <tr><th rowspan="2" scope="col">Method</th><th colspan="2" scope="colgroup">2Wiki</th><th colspan="2" scope="colgroup">HotpotQA</th><th colspan="2" scope="colgroup">MuSiQue</th><th colspan="2" scope="colgroup">MuSiQue-full</th><th scope="col">WixQA</th></tr>
+              <tr><th scope="col">Cont.-Acc.</th><th scope="col">LLM-Acc.</th><th scope="col">Cont.-Acc.</th><th scope="col">LLM-Acc.</th><th scope="col">Cont.-Acc.</th><th scope="col">LLM-Acc.</th><th scope="col">Cont.-Acc.</th><th scope="col">LLM-Acc.</th><th scope="col">LLM-Acc.</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Vanilla RAG (Top-5)</th><td>58.80</td><td>59.40</td><td>65.20</td><td>77.10</td><td>34.00</td><td>43.70</td><td>27.35</td><td>41.33</td><td>—</td></tr>
+              <tr><th scope="row">LightRAG</th><td>60.60</td><td>48.20</td><td>62.20</td><td>71.70</td><td>39.20</td><td>49.10</td><td>29.83</td><td>44.89</td><td>—</td></tr>
+              <tr><th scope="row">GFM-RAG</th><td>75.50</td><td>77.80</td><td>72.50</td><td>86.10</td><td>42.70</td><td>52.50</td><td>37.28</td><td>47.75</td><td>—</td></tr>
+              <tr><th scope="row">HippoRAG2</th><td>76.50</td><td>68.00</td><td>71.20</td><td>84.60</td><td>45.40</td><td>52.90</td><td>40.92</td><td>44.06</td><td>—</td></tr>
+              <tr class="runner-up"><th scope="row">LinearRAG</th><td>79.60</td><td>84.40</td><td>72.90</td><td>86.80</td><td>48.50</td><td>60.70</td><td>41.00</td><td>52.71</td><td>66.00</td></tr>
+              <tr class="ours"><th scope="row">LivingRAG (Ours)</th><td><strong>82.70</strong></td><td><strong>87.00</strong></td><td><strong>73.20</strong></td><td><strong>88.00</strong></td><td><strong>50.80</strong></td><td><strong>64.40</strong></td><td><strong>44.39</strong></td><td><strong>58.42</strong></td><td><strong>70.25</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note" id="table-note">Cont.-Acc.: Contain-Match Accuracy. LLM-Acc.: LLM-Evaluation Accuracy. Best results are <strong>bold</strong>; second-best results are <span class="underlined">underlined</span>. WixQA is reported only for LinearRAG and LivingRAG; unavailable results are marked with —.</p>
+      </div>
+    </section>
+
+    <section class="section reading-width citation-section" id="citation" aria-labelledby="citation-title">
+      <p class="section-label">Citation</p>
+      <div class="citation-heading"><h2 id="citation-title">BibTeX</h2><div class="citation-actions"><a href="citation.bib" download>Download .bib</a><button type="button" id="copy-citation" hidden>Copy</button></div></div>
+      <pre><code id="bibtex">@misc{cui2026livingragaugmentinggraphrag,
+  title={LivingRAG: Augmenting Graph RAG with Experience},
+  author={Yuzhuo Cui and Zongye Zhang and Qingjie Liu},
+  year={2026},
+  eprint={2608.25960},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2608.25960}
+}</code></pre>
+      <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer content-width"><p>LivingRAG <span aria-hidden="true">·</span> Findings of EMNLP 2026</p><a href="https://github.com/yuzhuocui/LivingRAG">GitHub ↗</a></footer>
+</body>
+</html>
